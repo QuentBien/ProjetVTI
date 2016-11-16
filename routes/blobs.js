@@ -128,6 +128,7 @@ router.route('/:id')
         res.format({
           html: function(){
               res.render('blobs/show', {
+                  "title": "Infos of blob",
                 "blobdob" : blobdob,
                 "blob" : blob
               });
