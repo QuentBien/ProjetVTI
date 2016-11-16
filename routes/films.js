@@ -1,6 +1,6 @@
 var express = require('express'),
   router = express.Router(),
-  mongoose.require('mongoose'),
+  mongoose = require('mongoose'),
   bodyParser = require('body-parser'), //parses information from POST
   methodOverride = require('method-override'); //used to manipulate POST
 
@@ -17,10 +17,11 @@ router.use(methodOverride(function(req, res){
 }))
 
 
-router.route('/films')
-  .get('/', function(req, res) {
+router.route('/')
+  .get(function(req, res, next) {
   
   mongoose.model('film').find({}, function(err,films){
   res.end('films : '+films[1].Titre);
-}
-});
+})}
+);
+module.exports = router;
