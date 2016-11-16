@@ -5,11 +5,12 @@ var express = require('express'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser');
 
-var db = require('./model/db'),
-    blob = require('./model/blobs');
-
+//var db = require('./model/db'),
+//    blob = require('./model/blobs');
+var db = require('./model/film_test');
 var routes = require('./routes/index'),
-    blobs = require('./routes/blobs');
+    blobs = require('./routes/blobs'),
+    films = require('./routes/films');
 
 //var users = require('./routes/users');
 
@@ -28,7 +29,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/blobs', blobs);
+//app.use('/blobs', blobs);
+app.use('/films',films);
 //app.use('/users', users);
 
 // catch 404 and forward to error handler
