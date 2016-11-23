@@ -20,8 +20,10 @@ router.use(methodOverride(function(req, res){
 
 router.route('/')
   .get(function(req, res, next) {
-	require('../controller/filmController');  
-	res.render(path.join(__dirname + '/views/films.ejs'));
-})}
-);
+	filmController = require('../controller/filmController');
+      res.render('films', {
+          tagline: 'All my films',
+          filmController: filmController
+      });
+});
 module.exports = router;
