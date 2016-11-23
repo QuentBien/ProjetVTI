@@ -2,7 +2,8 @@ var express = require('express'),
   router = express.Router(),
   mongoose = require('mongoose'),
   bodyParser = require('body-parser'), //parses information from POST
-  methodOverride = require('method-override'); //used to manipulate POST
+  methodOverride = require('method-override'), //used to manipulate POST
+  path = require('path');
 
 //Any requests to this controller must pass through this 'use' function
 //Copy and pasted from method-override
@@ -19,9 +20,8 @@ router.use(methodOverride(function(req, res){
 
 router.route('/')
   .get(function(req, res, next) {
-  
-  mongoose.model('film').find({}, function(err,films){
-  res.end('films : '+films[1].Titre);
+	require('../controller/filmController');  
+	res.render(path.join(__dirname + '/views/films.ejs'));
 })}
 );
 module.exports = router;
