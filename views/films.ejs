@@ -1,0 +1,33 @@
+<!doctype html>
+<head>
+<title><%= tagline %></title>
+</head>
+<html>
+<body>
+<head>
+
+</head>
+<section>
+<h1>Films :</h1>
+
+    <% filmController.films.forEach(function(film) { %>
+	<ul>
+        <li><%= film._id %></li>
+        <li><%= film.title %></li>
+        <li><%= film.year %></li>
+        <li><%= film.genre %></li>
+        <li><%= film.summary %></li>
+        <li><%= film.country %></li>
+        <li><%= film.director.last_name %></li>
+		<% film.actors.forEach(function(actor) { %>
+		<ul>
+			<li><%= actor.last_name %></li>
+		</ul>
+		<% }); %>
+	</ul>
+	<hr/>
+    <% }); %>
+
+</section>
+</body>
+</html>
