@@ -20,7 +20,7 @@ router.use(methodOverride(function(req, res){
 
 router.route('/')
   .get(function(req, res, next) {
-	filmController = require('../controller/filmController');
+	var filmController = require('../controller/filmController');
       res.render('films', {
           tagline: 'All my films',
           filmController: filmController
