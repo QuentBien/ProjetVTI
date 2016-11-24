@@ -18,21 +18,6 @@ router.use(methodOverride(function(req, res){
 }))
 
 
-/*router.route('/')
-  .get(function(req, res, next) {
-	//var filmController = require('../controller/filmController');
-  var films;
-  mongoose.model('film').find({}, function(err, movies){
-	films = movies;
-  });
-   res.render('films', {
-          tagline: 'All my films',
-          "films": films
-      });
-});*/
-
-//build the REST operations at the base for blobs
-//this will be accessible from http://127.0.0.1:3000/blobs if the default route for / is left unchanged
 router.route('/')
     //GET all blobs
     .get(function(req, res, next) {
@@ -61,7 +46,7 @@ router.route('/')
     });
 router.route('/:id/delete')
 	.delete(function(req, res) {
-        mongoose.model('film').findById(req.id, function(err, film){
+        mongoose.model('film').findById(req.params.id, function(err, film){
 			if (err) {
                 throw err;
             } else {
