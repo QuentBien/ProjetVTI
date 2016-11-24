@@ -20,10 +20,14 @@ router.use(methodOverride(function(req, res){
 
 router.route('/')
   .get(function(req, res, next) {
-	var filmController = require('../controller/filmController');
-      res.render('films', {
+	//var filmController = require('../controller/filmController');
+  var films;
+  mongoose.model('film').find(function(err, movies){
+	films = films;
+  });
+   res.render('films', {
           tagline: 'All my films',
-          filmController: filmController
+          films: films
       });
 });
 module.exports = router;

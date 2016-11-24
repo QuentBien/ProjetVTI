@@ -7,7 +7,8 @@ var express = require('express'),
 
 //var db = require('./model/db'),
 //    blob = require('./model/blobs');
-var db = require('./model/db');
+var db = require('./model/db'),
+    film = require('./model/films')
 var routes = require('./routes/index'),
 //    blobs = require('./routes/blobs'),
     films = require('./routes/films');
