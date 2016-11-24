@@ -24,7 +24,7 @@ router.route('/')
         //retrieve all blobs from Monogo
         mongoose.model('Blob').find({}, function (err, blobs) {
               if (err) {
-                  return console.error(err);
+                  throw err;
               } else {
                   //respond to both HTML and JSON. JSON responses require 'Accept: application/json;' in the Request Header
                   res.format({
