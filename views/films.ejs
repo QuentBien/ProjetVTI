@@ -5,13 +5,13 @@
 <html>
 <body>
 <head>
-
+<script src="./controller/filmController.js"></script>
 </head>
 <section>
 <h1>Films :</h1>
 
     <% films.forEach(function(film) { %>
-	<ul>
+	<ul id="<%= film.title %>">
         <li><%= film._id %></li>
         <li><%= film.title %></li>
         <li><%= film.year %></li>
@@ -19,12 +19,13 @@
         <li><%= film.summary %></li>
         <li><%= film.country %></li>
         <li><%= film.director.last_name %></li>
-		<% film.actors.forEach(function(actor) { %>
 		<ul>
+		<% film.actors.forEach(function(actor) { %>
 			<li><%= actor.last_name %></li>
-		</ul>
 		<% }); %>
+		</ul>
 	</ul>
+	<button onclick="deleteFilm(<%= JSON.stringify(film) %>)">Supprimer</button>
 	<hr/>
     <% }); %>
 

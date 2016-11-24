@@ -59,4 +59,16 @@ router.route('/')
               }     
         });
     })
+	.delete(function(req, res) {
+        mongoose.modele('film').find(req.filmToDelete, function(err, movie){
+			if (err) {
+                throw err;
+            } else {
+				movie.remove(function(err){
+					if (err) throw err;
+				});
+				res.send('OK');
+			}
+		});
+    });
 module.exports = router;
