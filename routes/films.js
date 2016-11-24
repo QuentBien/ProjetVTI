@@ -58,13 +58,14 @@ router.route('/')
                 });
               }     
         });
-    })
+    });
+router.route('/:id/delete')
 	.delete(function(req, res) {
-        mongoose.modele('film').find(req.filmToDelete, function(err, movie){
+        mongoose.model('film').findById(req.id, function(err, film){
 			if (err) {
                 throw err;
             } else {
-				movie.remove(function(err){
+				film.remove(function(err){
 					if (err) throw err;
 				});
 				res.send('OK');

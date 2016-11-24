@@ -11,7 +11,8 @@
 <h1>Films :</h1>
 
     <% films.forEach(function(film) { %>
-	<ul id="<%= film.title %>">
+	<div id="<%= film._id %>">
+	<ul>
         <li><%= film._id %></li>
         <li><%= film.title %></li>
         <li><%= film.year %></li>
@@ -27,6 +28,7 @@
 	</ul>
 	<button onclick="deleteFilm(<%= JSON.stringify(film) %>)">Supprimer</button>
 	<hr/>
+	</div>
     <% }); %>
 
 </section>

@@ -15,9 +15,7 @@ var updateFilm = function(filmToUpdate){
 }*/
 var deleteFilm = function(filmToDelete){
 	var xmlHttp = new XMLHttpRequest();
-	console.log(JSON.stringify(filmToDelete));
-	xmlHttp.open("DELETE", 'http://localhost:3000/films', true);
-	xmlHttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+	xmlHttp.open("DELETE", 'http://localhost:3000/films/'+filmToDelete._id+'/delete', true);
 	xmlHttp.send();
-	document.getElementById(filmToDelete.title).innerHTML="";
+	document.getElementById(filmToDelete._id).innerHTML="";
 };
