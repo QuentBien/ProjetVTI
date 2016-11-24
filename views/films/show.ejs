@@ -1,0 +1,18 @@
+<html>
+<head>
+    <% include ../partials/head %>
+</head>
+<body>
+<h1>Info <%= film._id %></h1>
+<ul>
+    <li>Titre: <%= film.Titre %></li>
+    <li>Date de sortie: <%= film.date_de_sortie %></li>
+    <li>Duree: <%= film.duree %></li>
+    <li>Realisateur: <%= film.realisateur %></li>
+    <li>Casting: <%= film.casting %></li>
+    <li>Genre: <%= film.genre %></li>
+    <li>Nationalite: <%= film.nationalite %></li>
+    <li>Note: <%= film.note %>/20</li>
+</ul>
+</body>
+</html>

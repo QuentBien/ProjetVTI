@@ -1,0 +1,27 @@
+<html>
+<head>
+    <% include ../partials/head %>
+</head>
+<body>
+<h1><%= title %></h1>
+<ul>
+    <!-- <% films.forEach(function (film){ %>
+    <li><%= film.Titre %></li>
+    <li><%= film.date_de_sortie %></li>
+    <li><%= film.duree %></li>
+    <li><%= film.realisateur %></li>
+    <li><%= film.casting %></li>
+    <li><%= film.genre %></li>
+    <li><%= film.nationalite %></li>
+    <li><%= film.note %></li> -->
+
+    <form action="<%= '/films/'+film._id+'/edit'%>" method="post" enctype="application/x-www-form-urlencoded">
+        <input type="hidden" value="DELETE", name="_method"/>
+        <button type="submit">Delete</button>
+    </form>
+    <p><a href="<%= '/films/'+film.id+'/edit' %>">Edit</a></p>
+    <p><a href="<%= '/films/'+film.id %>">Show</a></p>
+    <% }) %>
+</ul>
+</body>
+</html>
