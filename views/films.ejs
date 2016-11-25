@@ -28,14 +28,16 @@
   </dialog>
 <div>
     <% films.forEach(function(film) { %>
-	<div id="<%= film._id %>" class="mdl-card mdl-shadow--2dp" style="width:450px;min-height:400px;display:inline-block;margin-bottom:20px;margin-left:20px">
+	<div id="<%= film._id %>" class="mdl-card mdl-shadow--2dp" style="width:450px;height:450px;display:inline-block;margin-bottom:20px;margin-left:20px">
 	<ul>
-	<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-button--icon" onclick="showDeleteModal(<%= JSON.stringify(film._id) %>, <%= JSON.stringify(film.title) %>)" style="float:right;display:inline-block;margin-left:10px;margin-right:10px"><i class="material-icons">delete</i></button>
-	<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-button--icon" onclick="" style="float:right;display:inline-block;"><i class="material-icons">edit</i></button>	
+	<button id="del<%= film._id %>" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-button--icon" onclick="showDeleteModal(<%= JSON.stringify(film._id) %>, <%= JSON.stringify(film.title) %>)" style="float:right;display:inline-block;margin-left:10px;margin-right:10px"><i class="material-icons">delete</i></button>
+		<div class="mdl-tooltip" data-mdl-for="del<%= film._id %>">Supprimer le film</div>
+	<button id="ed<%= film._id %>" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-button--icon" onclick="" style="float:right;display:inline-block;"><i class="material-icons">edit</i></button>	
+		<div class="mdl-tooltip" data-mdl-for="ed<%= film._id %>">Editer le film</div>
 		<div class="mdl-card__title">
         <li class="mdl-card__title-text"><%= film.title %></li>
 		</div>
-		<div class="mdl-card__supporting-text" style="height:300px;overflow-y:scroll">
+		<div class="mdl-card__supporting-text" style="height:330px;overflow-y:scroll">
         <li><%= film.year %></li>
         <li><%= film.genre %></li>
         <li><%= film.summary %></li>
