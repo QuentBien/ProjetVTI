@@ -23,6 +23,10 @@ var showDeleteModal = function(idFilm){
       deleteFilm(idFilm);
 	  document.querySelector('dialog').style.display="none";
 	  document.querySelector('dialog').close();
+	  var snackbarContainer = document.querySelector('#demo-toast-example');
+	  var showToastButton = document.querySelector('#demo-show-toast');
+      var data = {message: 'Le film a bien été supprimé'};
+      snackbarContainer.MaterialSnackbar.showSnackbar(data);
     });
 	document.querySelector('dialog').showModal();
 };
