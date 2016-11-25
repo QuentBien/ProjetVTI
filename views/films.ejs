@@ -16,7 +16,7 @@
 </div>
 <section style="padding-left:50px;padding-right:50px">
 <h1>Films :</h1>
-<dialog class="mdl-dialog" style="width:400px;display:none">
+<dialog class="mdl-dialog" style="width:450px;display:none">
     <h4 class="mdl-dialog__title">Supprimer le film ?</h4>
     <div class="mdl-dialog__content">
       <p id="diag"></p>
@@ -30,6 +30,8 @@
     <% films.forEach(function(film) { %>
 	<div id="<%= film._id %>" class="mdl-card mdl-shadow--2dp" style="width:450px;min-height:400px;display:inline-block;margin-bottom:20px;margin-left:20px">
 	<ul>
+	<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-button--icon" onclick="showDeleteModal(<%= JSON.stringify(film._id) %>, <%= JSON.stringify(film.title) %>)" style="float:right;display:inline-block;margin-left:10px;margin-right:10px"><i class="material-icons">delete</i></button>
+	<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-button--icon" onclick="" style="float:right;display:inline-block;"><i class="material-icons">edit</i></button>	
 		<div class="mdl-card__title">
         <li class="mdl-card__title-text"><%= film.title %></li>
 		</div>
@@ -46,10 +48,6 @@
 		<% }); %>
 		</div>
 	</ul>
-<div class="mdl-card__actions mdl-card--border" style="height:50px">
-<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="" style="width:200px;float:left;display:block;">Editer</button>
-<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="showDeleteModal(<%= JSON.stringify(film._id) %>, <%= JSON.stringify(film.title) %>)" style="width:200px;float:right;display:block;">Supprimer</button>
-</div>
 </div>
     <% }); %>
 </div>
