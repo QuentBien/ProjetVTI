@@ -19,9 +19,7 @@
 <dialog class="mdl-dialog" style="width:400px;display:none">
     <h4 class="mdl-dialog__title">Supprimer le film ?</h4>
     <div class="mdl-dialog__content">
-      <p>
-        Voulez-vous vraiment supprimer ce film ?
-      </p>
+      <p id="diag"></p>
     </div>
     <div class="mdl-dialog__actions">
       <button id="confirm" type="button" class="mdl-button">Confirmer</button>
@@ -50,7 +48,7 @@
 	</ul>
 <div class="mdl-card__actions mdl-card--border" style="height:50px">
 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="" style="width:200px;float:left;display:block;">Editer</button>
-<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="showDeleteModal(<%= JSON.stringify(film._id) %>)" style="width:200px;float:right;display:block;">Supprimer</button>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="showDeleteModal(<%= JSON.stringify(film._id) %>, <%= JSON.stringify(film.title) %>)" style="width:200px;float:right;display:block;">Supprimer</button>
 </div>
 </div>
     <% }); %>
