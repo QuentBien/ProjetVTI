@@ -1,75 +1,75 @@
 <html>
-<head>
-    <% include ../partials/head %>
-</head>
-<body>
-<h1><%= title %></h1>
-<form id="formAddFilm" name="addfilm" action="/films" method="post">
-    <p>
-        Titre:
-        <input id="inputTitle" type="text" placeholder="ex. Taxi 3" name="title">
-    </p>
 
-    <p>
-        Année:
-        <input id="inputAnnee" type="number" maxlength="4" minlength="4" placeholder="1994" name="year">
-    </p>
+    <head>
+        <% include ../partials/head %>
+    </head>
 
-    <p>
-        Genre:
-        <input id="inputGenre" type="text" placeholder="Fantastique" name="genre">
-    </p>
-
-    <p>
-        Résumé:
-        <textarea id="inputSummary" name="genre" cols="30" rows="30" />
-    </p>
-
-    <p>
-        Durée (min):
-        <input id="inputDuree" type="number" placeholder="120" name="duree">
-    </p>
-
-    <p>
-        Nationalite:
-        <input id="inputNationalite" type="text" placeholder="France" name="nationalite">
-    </p>
-
-    <hr/>
-
-    <h2> Directeur </h2>
-
-    <p>
-        Nom:
-        <input id="inputDNom" type="text" placeholder="John" name="director.lastname">
-    </p>
-
-    <p>
-        Prénom:
-        <input id="inputDPrenom" type="text" placeholder="Smith" name="director.firstname">
-    </p>
-
-    <p>
-        Date de naissance:
-        <input id="inputDDdn" type="date" name="director.birth_date">
-    </p>
+    <body>
+        <h1>
+            <%= title %>
+        </h1>
+        <form id="formAddFilm" name="addfilm" action="/films" method="post">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" id="inputTitle" type="text" name="title">
+                <label class="mdl-textfield__label" for="inputTitle">Titre</label>
+            </div>
 
 
-    <p>
-        Role:
-        <input id="inputDRole" type="text" placeholder="Breh" name="director.role">
-    </p>
+            <p>
+                Année:
+                <input class="mdl-textfield__input" id="inputAnnee" type="number" maxlength="4" minlength="4" placeholder="1994" name="year">
+            </p>
 
-    <hr/>
+            <p>
+                Genre:
+                <input class="mdl-textfield__input" id="inputGenre" type="text" placeholder="Fantastique" name="genre">
+            </p>
+            <div class="mdl-textfield mdl-js-textfield">
+                <textarea class="mdl-textfield__input" id="inputSummary" name="resume" cols="50" rows="20"></textarea>
+                <label class="mdl-textfield__label" for="inputSummary">Résumé</label>
+            </div>
 
-    <h2> Acteurs  </h2>
+            <p>
+                Durée (min):
+                <input class="mdl-textfield__input" id="inputDuree" type="number" placeholder="120" name="duree">
+            </p>
 
-    <p>
-        Acteurs:
-        TODO
-    </p>
+            <p>
+                Nationalite:
+                <input class="mdl-textfield__input" id="inputNationalite" type="text" placeholder="France" name="nationalite">
+            </p>
 
-    <button id="btnSubmit" type="submit">Submit</button>
-</form>
-</body>
+            <h2> Directeur </h2>
+
+            <p>
+                Nom:
+                <input class="mdl-textfield__input" id="inputDNom" type="text" placeholder="John" name="director.lastname">
+            </p>
+
+            <p>
+                Prénom:
+                <input class="mdl-textfield__input" id="inputDPrenom" type="text" placeholder="Smith" name="director.firstname">
+            </p>
+
+            <p>
+                Date de naissance:
+                <input class="mdl-textfield__input" id="inputDDdn" type="date" name="director.birth_date">
+            </p>
+
+
+            <p>
+                Role:
+                <input class="mdl-textfield__input" id="inputDRole" type="text" placeholder="Breh" name="director.role">
+            </p>
+
+            <h2> Acteurs </h2>
+
+            <p>
+                Acteurs: TODO
+            </p>
+
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="btnSubmit" type="submit">Submit</button>
+        </form>
+    </body>
+
 </html>
