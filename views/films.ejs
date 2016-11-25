@@ -1,81 +1,58 @@
 <!doctype html>
-
 <head>
-  <title>
-    <%= tagline %>
-  </title>
+<title><%= tagline %></title>
 </head>
 <html>
-
 <body>
-
-  <head>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
-    <script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
-    <script src="./controller/filmController.js"></script>
-  </head>
-  <div id="demo-toast-example" class="mdl-js-snackbar mdl-snackbar">
-    <div class="mdl-snackbar__text"></div>
-    <button class="mdl-snackbar__action" type="button"></button>
-  </div>
-  <section style="padding-left:50px;padding-right:50px">
-    <h1>Films :</h1>
-    <dialog class="mdl-dialog" style="width:400px;display:none">
-      <h4 class="mdl-dialog__title">Supprimer le film ?</h4>
-      <div class="mdl-dialog__content">
-        <p>
-          Voulez-vous vraiment supprimer ce film ?
-        </p>
-      </div>
-      <div class="mdl-dialog__actions">
-        <button id="confirm" type="button" class="mdl-button">Confirmer</button>
-        <button id="cancel" type="button" class="mdl-button close">Annuler</button>
-      </div>
-    </dialog>
-    <div>
-      <% films.forEach(function(film) { %>
-        <div id="<%= film._id %>" class="mdl-card mdl-shadow--2dp" style="width:450px;min-height:400px;display:inline-block;margin-bottom:20px;margin-left:20px">
-          <ul>
-            <div class="mdl-card__title">
-              <li class="mdl-card__title-text">
-                <%= film.title %>
-              </li>
-            </div>
-            <div class="mdl-card__supporting-text" style="height:300px;overflow-y:scroll">
-              <li>
-                <%= film.year %>
-              </li>
-              <li>
-                <%= film.genre %>
-              </li>
-              <li>
-                <%= film.summary %>
-              </li>
-              <li>
-                <%= film.country %>
-              </li>
-              <li>
-                <%= film.director.last_name %>
-              </li>
-              <% film.actors.forEach(function(actor) { %>
-                <ul>
-                  <li>
-                    <%= actor.last_name %>
-                  </li>
-                </ul>
-                <% }); %>
-            </div>
-          </ul>
-          <div class="mdl-card__actions mdl-card--border" style="height:50px">
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="" style="width:200px;float:left;display:block;">Editer</button>
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="showDeleteModal(<%= JSON.stringify(film._id) %>)"
-              style="width:200px;float:right;display:block;">Supprimer</button>
-          </div>
-        </div>
-        <% }); %>
+<head>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.2.1/material.min.js"></script>
+<script src="./controller/filmController.js"></script>
+</head>
+<div id="demo-toast-example" class="mdl-js-snackbar mdl-snackbar">
+  <div class="mdl-snackbar__text"></div>
+  <button class="mdl-snackbar__action" type="button"></button>
+</div>
+<section style="padding-left:50px;padding-right:50px">
+<h1>Films :</h1>
+<dialog class="mdl-dialog" style="width:400px;display:none">
+    <h4 class="mdl-dialog__title">Supprimer le film ?</h4>
+    <div class="mdl-dialog__content">
+      <p id="diag"></p>
     </div>
-  </section>
+    <div class="mdl-dialog__actions">
+      <button id="confirm" type="button" class="mdl-button">Confirmer</button>
+      <button id="cancel" type="button" class="mdl-button close">Annuler</button>
+    </div>
+  </dialog>
+<div>
+    <% films.forEach(function(film) { %>
+	<div id="<%= film._id %>" class="mdl-card mdl-shadow--2dp" style="width:450px;min-height:400px;display:inline-block;margin-bottom:20px;margin-left:20px">
+	<ul>
+		<div class="mdl-card__title">
+        <li class="mdl-card__title-text"><%= film.title %></li>
+		</div>
+		<div class="mdl-card__supporting-text" style="height:300px;overflow-y:scroll">
+        <li><%= film.year %></li>
+        <li><%= film.genre %></li>
+        <li><%= film.summary %></li>
+        <li><%= film.country %></li>
+        <li><%= film.director.last_name %></li>
+		<% film.actors.forEach(function(actor) { %>
+		<ul>
+			<li><%= actor.last_name %></li>
+		</ul>
+		<% }); %>
+		</div>
+	</ul>
+<div class="mdl-card__actions mdl-card--border" style="height:50px">
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="" style="width:200px;float:left;display:block;">Editer</button>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="showDeleteModal(<%= JSON.stringify(film._id) %>, <%= JSON.stringify(film.title) %>)" style="width:200px;float:right;display:block;">Supprimer</button>
+</div>
+</div>
+    <% }); %>
+</div>
+</section>
 </body>
-
 </html>
