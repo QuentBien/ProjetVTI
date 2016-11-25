@@ -26,9 +26,9 @@
       <button id="cancel" type="button" class="mdl-button close">Annuler</button>
     </div>
   </dialog>
-<div>
+<div id="flexbox" style="display:flex;flex-wrap:wrap;justify-content: space-around;justify-content: center;">
     <% films.forEach(function(film) { %>
-	<div id="<%= film._id %>" class="mdl-card mdl-shadow--2dp" style="width:450px;min-height:400px;display:inline-block;margin-bottom:20px;margin-left:20px">
+	<div id="<%= film._id %>" class="mdl-card mdl-shadow--2dp" style="width:450px;min-height:400px;margin-bottom:20px;margin-left:20px">
 	<ul>
 	<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-button--icon" onclick="showDeleteModal(<%= JSON.stringify(film._id) %>, <%= JSON.stringify(film.title) %>)" style="float:right;display:inline-block;margin-left:10px;margin-right:10px"><i class="material-icons">delete</i></button>
 	<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-button--icon" onclick="" style="float:right;display:inline-block;"><i class="material-icons">edit</i></button>	
