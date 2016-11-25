@@ -14,11 +14,14 @@ var updateFilm = function(filmToUpdate){
 	});
 }*/
 var showDeleteModal = function(idFilm){
+	document.querySelector('dialog').style.display="block";
 	document.getElementById('cancel').addEventListener('click', function() {
+	  document.querySelector('dialog').style.display="none";
       document.querySelector('dialog').close();
     });
 	document.getElementById('confirm').addEventListener('click', function() {
       deleteFilm(idFilm);
+	  document.querySelector('dialog').style.display="none";
 	  document.querySelector('dialog').close();
     });
 	document.querySelector('dialog').showModal();
