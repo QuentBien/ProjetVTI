@@ -58,5 +58,18 @@ router.route('/')
                 });
               }     
         });
-    })
+    });
+router.route('/:id')
+	.delete(function(req, res) {
+        mongoose.model('film').findById(req.params.id, function(err, film){
+			if (err) {
+                throw err;
+            } else {
+				film.remove(function(err){
+					if (err) throw err;
+				});
+				res.send('OK');
+			}
+		});
+    });
 module.exports = router;
