@@ -13,12 +13,19 @@
     <% films.forEach(function(film) { %>
 	<ul>
         <li><%= film._id %></li>
-        <li><%= film.title %></li>
+        <li><h2><%= film.title %></h2></li>
         <li><%= film.year %></li>
         <li><%= film.genre %></li>
         <li><%= film.summary %></li>
         <li><%= film.country %></li>
+        <hr/>
+        <h2> Directeur </h2>
+        <li><%= film.director._id %></li>
         <li><%= film.director.last_name %></li>
+        <li><%= film.director.first_name %></li>
+        <li><%= film.director.birth_date %></li>
+        <hr/>
+        <h3> Acteurs </h2>
 		<% film.actors.forEach(function(actor) { %>
 		<ul>
 			<li><%= actor.last_name %></li>

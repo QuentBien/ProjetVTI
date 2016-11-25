@@ -68,6 +68,7 @@ router.route('/')
                     html: function(){
                         // If it worked, set the header so the address bar doesn't still say /adduser
                         res.location("blobs");
+                        
                         // And forward to success page
                         res.redirect("/blobs");
                     },
