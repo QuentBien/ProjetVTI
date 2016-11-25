@@ -17,6 +17,41 @@ router.use(methodOverride(function(req, res){
       }
 }))
 
+/* GET New Film page. */
+router.get('/new', function(req, res) {
+    res.render('films/new', { title: 'Ajouter un film' });
+});
+
+// route middleware to validate :id
+router.param('id', function(req, res, next, id) {
+    //console.log('validating ' + id + ' exists');
+    //find the ID in the Database
+    mongoose.model('film').findById(id, function (err, film) {
+        //if it isn't found, we are going to repond with 404
+        if (err) {
+            console.log(id + ' was not found');
+            res.status(404)
+            var err = new Error('Not Found');
+            err.status = 404;
+            res.format({
+                html: function(){
+                    next(err);
+                 },
+                json: function(){
+                       res.json({message : err.status  + ' ' + err});
+                 }
+            });
+        //if it is found we continue on
+        } else {
+            //uncomment this next line if you want to see every JSON document response for every GET/PUT/DELETE call
+            console.log(film);
+            // once validation is done save the new item in the req
+            req.id = id;
+            // go to the next thing
+            next(); 
+        } 
+    });
+});
 
 /*router.route('/')
   .get(function(req, res, next) {
@@ -41,7 +76,6 @@ router.route('/')
               if (err) {
                 throw err;
               } else {
-                  console.log(films);
                   //respond to both HTML and JSON. JSON responses require 'Accept: application/json;' in the Request Header
                   res.format({
                       //HTML response will render the index.jade file in the views/blobs folder. We are also setting "blobs" to be an accessible variable in our jade view
