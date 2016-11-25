@@ -3,7 +3,7 @@
 <title><%= tagline %></title>
 </head>
 <html>
-<body>
+<body style="background:whitesmoke;">
 <head>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.indigo-pink.min.css">
@@ -37,7 +37,7 @@
 		<div class="mdl-card__title">
         <li class="mdl-card__title-text"><%= film.title %></li>
 		</div>
-		<div class="mdl-card__supporting-text" style="height:330px;overflow-y:scroll">
+		<div class="mdl-card__supporting-text" style="height:330px;overflow-y:scroll;display:flex;flex-direction: column;justify-content: space-around;">
         <li><%= film.year %></li>
         <li><%= film.genre %></li>
         <li><%= film.summary %></li>
