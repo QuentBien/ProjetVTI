@@ -6,3 +6,10 @@ body {
 a {
   color: #00B7FF;
 }
+
+.button-ajout {
+  position:fixed !important;
+  right:2%;
+  bottom:2%;
+  z-index: 2;
+}
