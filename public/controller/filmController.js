@@ -18,15 +18,15 @@ var showDeleteModal = function(idFilm, titleFilm){
 	id=idFilm;
 	title=titleFilm;
 	document.getElementById('diag').innerHTML="Voulez-vous vraiment supprimer le film "+title+" ?";
-	document.querySelector('dialog').style.display="block";
+	document.getElementById('form-delete').style.display="block";
 	document.getElementById('cancel').addEventListener('click', cancelDeleteHandler);
 	document.getElementById('confirm').addEventListener('click', confirmDeleteHandler);
-	document.querySelector('dialog').showModal();
+	document.getElementById('form-delete').showModal();
 };
 var confirmDeleteHandler = function(){
 	deleteFilm(id);
-	  document.querySelector('dialog').style.display="none";
-	  document.querySelector('dialog').close();
+	  document.getElementById('form-delete').style.display="none";
+	  document.getElementById('form-delete').close();
 	  var snackbarContainer = document.querySelector('#demo-toast-example');
 	  var showToastButton = document.querySelector('#demo-show-toast');
       var data = {message: 'Le film '+title+' a bien été supprimé'};
@@ -34,8 +34,8 @@ var confirmDeleteHandler = function(){
 	  document.getElementById('confirm').removeEventListener('click', confirmDeleteHandler);
 }
 var cancelDeleteHandler = function(){
-	  document.querySelector('dialog').style.display="none";
-      document.querySelector('dialog').close();
+	  document.getElementById('form-delete').style.display="none";
+      document.getElementById('form-delete').close();
 	  document.getElementById('cancel').removeEventListener('click', cancelDeleteHandler);
 }
 var deleteFilm = function(filmToDelete){
@@ -44,3 +44,29 @@ var deleteFilm = function(filmToDelete){
 	xmlHttp.send();
 	document.getElementById(filmToDelete).remove();
 };
+
+/* FORMULAIRE AJOUT */
+
+var showAjoutForm = function(){
+	document.getElementById('form-ajout').style.display="block";
+	document.getElementById('cancel-ajout').addEventListener('click', cancelAjout);
+	document.getElementById('confirm-ajout').addEventListener('click', confirmAjout);
+	document.getElementById('form-ajout').showModal();
+};
+
+var confirmAjout = function(){
+	//deleteFilm(id);
+	  document.getElementById("formAddFilm").submit();
+	  document.getElementById('form-ajout').style.display="none";
+	  document.getElementById('form-ajout').close();
+	  var snackbarContainer = document.querySelector('#demo-toast-example');
+	  var showToastButton = document.querySelector('#demo-show-toast');
+      //var data = {message: 'Le film '+title+' a bien été supprimé'};
+      snackbarContainer.MaterialSnackbar.showSnackbar(data);
+	  document.getElementById('confirm-ajout').removeEventListener('click', confirmAjout);
+}
+var cancelAjout = function(){
+	  document.getElementById('form-ajout').style.display="none";
+      document.getElementById('form-ajout').close();
+	  document.getElementById('cancel-ajout').removeEventListener('click', cancelAjout);
+}
