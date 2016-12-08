@@ -3,8 +3,7 @@ var express = require('express'),
   mongoose = require('mongoose'),
   bodyParser = require('body-parser'), //parses information from POST
   methodOverride = require('method-override'), //used to manipulate POST
-  path = require('path'),
-  moment = require('moment');
+  path = require('path');
 
 //Any requests to this controller must pass through this 'use' function
 //Copy and pasted from method-override
@@ -83,8 +82,7 @@ router.route('/')
                     html: function(){
                         res.render('films', {
                               tagline: 'All my films',
-                              "films" : films,
-							  "moment" : moment
+                              "films" : films
                           });
                     },
                     //JSON response will show all blobs in JSON format
