@@ -13,9 +13,10 @@
   <button class="mdl-snackbar__action" type="button"></button>
 </div>
 <section style="padding-left:50px;padding-right:50px">
-        <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored button-ajout" onclick="showAjoutForm()">
+		<button id="ajoutFilmButton" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored button-ajout" onclick="showAjoutForm()">
             <i class="material-icons">add</i>
         </button>
+		<div class="mdl-tooltip mdl-tooltip--left" data-mdl-for="ajoutFilmButton">Ajouter un film</div>
 <h1>Films :</h1>
 <dialog class="mdl-dialog" id="form-delete" style="width:450px;display:none">
     <h4 class="mdl-dialog__title">Supprimer le film ?</h4>
