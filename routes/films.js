@@ -44,7 +44,7 @@ router.param('id', function (req, res, next, id) {
             //if it is found we continue on
         } else {
             //uncomment this next line if you want to see every JSON document response for every GET/PUT/DELETE call
-            console.log(film);
+            //console.log(film);
             // once validation is done save the new item in the req
             req.id = id;
             // go to the next thing
@@ -95,17 +95,17 @@ router.route('/')
     })
     .post(function (req, res) {
         // Get values from POST request. These can be done through forms or REST calls. These rely on the "name" attributes for forms
+        var _id = "movie:999"
         var title = req.body.title;
         var year = req.body.year;
         var genre = req.body.genre;
-        var summary = req.body.summary;
-        var country = req.body.country;
+        var summary = req.body.resume;
+        var country = req.body.nationalite;
 
         var director = {
             last_name: req.body.directorLastname,
             first_name: req.body.directorFirstname,
             birth_date: req.body.directorBirth_date,
-            role: req.body.directoRole
         };
 
         var actorsString = req.body.actorsList;
@@ -116,9 +116,9 @@ router.route('/')
             temp = acteur.split(" ");
 			actors.push({last_name : temp[1], first_name : temp[0]});
         }, this);
-
         //call the create function for our database
         mongoose.model('film').create({
+            _id: _id,
             title: title,
             year: year,
             genre: genre,
@@ -128,6 +128,7 @@ router.route('/')
             actors: actors
         }, function (err, film) {
             if (err) {
+                console.log(err);
                 res.send("There was a problem adding the information to the database.");
             } else {
                 //Film has been created
