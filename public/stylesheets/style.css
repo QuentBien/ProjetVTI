@@ -12,3 +12,17 @@ a {
   bottom:2%;
   z-index: 2;
 }
+::selection {
+  background: rgb(255,64,129) !important; /* WebKit/Blink Browsers */
+  color: white;
+}
+::-moz-selection {
+  background: rgb(255,64,129) !important; /* Gecko Browsers */
+  color: white;
+}
+h4 {
+	margin: 0 !important;
+}
+.mdl-dialog__title {
+	padding: 0px 24px 0 !important;
+}
