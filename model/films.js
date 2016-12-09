@@ -14,9 +14,7 @@ var filmSchema = new mongoose.Schema({
   },
   actors : [{
 	  last_name : String,
-	  first_name : String,
-	  birth_date : String,
-	  role : String
+	  first_name : String
   }]  
 });
 mongoose.model('film', filmSchema, 'film');
