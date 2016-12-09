@@ -1,3 +1,3 @@
 # ProjetVTI
 
-Site de production : http://vticine.azurewebsites.net/
+Site de production : http://vticine2.azurewebsites.net/
