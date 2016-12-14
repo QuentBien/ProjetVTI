@@ -123,11 +123,11 @@ router.route('/')
                 res.send("There was a problem adding the information to the database.");
             } else {
                 films.sort(compare);
-                var movie_id = films[films.length-1]._id;
+                var movie_id = films[films.length - 1]._id;
                 console.log(movie_id);
-                var id = parseInt(movie_id.split(":")[1])+1;
+                var id = parseInt(movie_id.split(":")[1]) + 1;
                 console.log(id);
-                var _id = "movie:"+id;
+                var _id = "movie:" + id;
                 mongoose.model('film').create({
                     _id: _id,
                     title: title,
@@ -162,7 +162,6 @@ router.route('/')
                 });
             }
         });
-
     });
 router.route('/:id')
     .delete(function (req, res) {
@@ -178,12 +177,78 @@ router.route('/:id')
         });
     });
 
-function compare(a,b) {
-  if (a._id < b._id)
-    return -1;
-  if (a._id > b._id)
-    return 1;
-  return 0;
+function compare(a, b) {
+    if (a._id < b._id)
+        return -1;
+    if (a._id > b._id)
+        return 1;
+    return 0;
 }
 
+router.route('/update')
+    .post(function (req, res) {
+        // Get values from POST request. These can be done through forms or REST calls. These rely on the "name" attributes for forms
+        var _id = req.body._id;
+        var title = req.body.title;
+        var year = req.body.year;
+        var genre = req.body.genre;
+        var summary = req.body.resume;
+        var country = req.body.nationalite;
+
+        var director = {
+            last_name: req.body.directorLastname,
+            first_name: req.body.directorFirstname,
+            birth_date: req.body.directorBirth_date,
+        };
+
+        var actorsString = req.body.actorsList;
+        var acteurs = actorsString.split(";");
+        var actors = [];
+        var temp;
+        acteurs.forEach(function (acteur) {
+            temp = acteur.split(" ");
+            actors.push({ last_name: temp[1], first_name: temp[0] });
+        }, this);
+        //call the create function for our database
+        mongoose.model('film').find({}, function (err, films) {
+            if (err) {
+                console.log(err);
+                res.send("There was a problem updating the information to the database.");
+            } else {
+                mongoose.model('film').update({
+                    _id: _id
+                },{$set : {
+                    title: title,
+                    year: year,
+                    genre: genre,
+                    summary: summary,
+                    country: country,
+                    director: director,
+                    actors: actors
+                }}, function (err, film) {
+                    if (err) {
+                        console.log(err);
+                        res.send("There was a problem updating the information to the database.");
+                    } else {
+                        //Film has been created
+                        console.log('PATCH updating new film: ' + film);
+                        res.format({
+                            //HTML response will set the location and redirect back to the home page. You could also create a 'success' page if that's your thing
+                            html: function () {
+                                // If it worked, set the header so the address bar doesn't still say /adduser
+                                res.location("films");
+
+                                // And forward to success page
+                                res.redirect("/films");
+                            },
+                            //JSON response will show the newly created blob
+                            json: function () {
+                                res.json(film);
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    });
 module.exports = router;
