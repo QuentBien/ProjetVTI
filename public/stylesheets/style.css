@@ -26,3 +26,6 @@ h4 {
 .mdl-dialog__title {
 	padding: 0px 24px 0 !important;
 }
+.search-bar {
+	width: 230px !important;
+}
