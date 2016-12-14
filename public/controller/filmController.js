@@ -40,7 +40,7 @@ var cancelDeleteHandler = function () {
 }
 var deleteFilm = function (filmToDelete) {
 	var xmlHttp = new XMLHttpRequest();
-	xmlHttp.open("DELETE", './films/' + filmToDelete, true);
+	xmlHttp.open("DELETE", '/films/'+filmToDelete, true);
 	xmlHttp.send();
 	document.getElementById(filmToDelete).remove();
 };
