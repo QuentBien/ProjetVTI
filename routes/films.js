@@ -167,7 +167,7 @@ router.route('/search')
 	.post(function (req, res) {
         var search = new Object();
 		if(req.body.options == "year") {
-			search[req.body.options] = parseInt(req.body.rechercher);
+			search["$where"] = "function() { return this.year.toString().match(/"+req.body.rechercher+"/) != null; }";
 		} else {
 			search[req.body.options] = new RegExp('.*'+req.body.rechercher+'.*','i');
 		}
