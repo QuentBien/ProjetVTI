@@ -164,6 +164,36 @@ router.route('/')
         });
 
     });
+router.route('/search')
+	.post(function (req, res) {
+        var search = new Object();
+		if(req.body.options == "year") {
+			search[req.body.options] = parseInt(req.body.rechercher);
+		} else {
+			search[req.body.options] = new RegExp('.*'+req.body.rechercher+'.*','i');
+		}
+		console.log(search);
+        mongoose.model('film').find(search, function (err, films) {
+            if (err) {
+                throw err;
+            } else {
+                //respond to both HTML and JSON. JSON responses require 'Accept: application/json;' in the Request Header
+                res.format({
+                    //HTML response will render the index.jade file in the views/blobs folder. We are also setting "blobs" to be an accessible variable in our jade view
+                    html: function () {
+                        res.render('films', {
+                            tagline: 'All my films',
+                            "films": films
+                        });
+                    },
+                    //JSON response will show all blobs in JSON format
+                    json: function () {
+                        res.json(films);
+                    }
+                });
+            }
+        });
+    });
 router.route('/:id')
     .delete(function (req, res) {
         mongoose.model('film').findById(req.params.id, function (err, film) {
