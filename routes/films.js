@@ -1,14 +1,13 @@
 var express = require('express'),
     router = express.Router(),
     mongoose = require('mongoose'),
-    bodyParser = require('body-parser'), //parses information from POST
-    methodOverride = require('method-override'), //used to manipulate POST
+    bodyParser = require('body-parser'),
+    methodOverride = require('method-override'),
     fs = require("fs"),
     path = require('path');
 
-//router.use(bodyParser.urlencoded({ extended: true }))
-router.use(bodyParser.urlencoded({ extended: false }))
-router.use(bodyParser.json()) 
+router.use(bodyParser.urlencoded({ extended: true }))
+//router.use(bodyParser.json()) 
 router.use(methodOverride(function (req, res) {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
         var method = req.body._method
@@ -33,9 +32,6 @@ router.param('id', function (req, res, next, id) {
                 }
             });
         } else {
-            //uncomment this next line if you want to see every JSON document response for every GET/PUT/DELETE call
-            //console.log(film);
-            // once validation is done save the new item in the req
             req.id = id;
             next();
         }
@@ -100,15 +96,10 @@ router.route('/')
         insertFilm(movie, res, 0);
 
         res.format({
-            //HTML response will set the location and redirect back to the home page. You could also create a 'success' page if that's your thing
             html: function () {
-                // If it worked, set the header so the address bar doesn't still say /adduser
                 res.location("films");
-
-                // And forward to success page
                 res.redirect("/films");
             },
-            //JSON response will show the newly created blob
             json: function () {
                 res.json(film);
             }
@@ -116,7 +107,6 @@ router.route('/')
     });
 
 function insertFilm(movie, res, cpt){
-            // Get values from POST request. These can be done through forms or REST calls. These rely on the "name" attributes for forms
         var title = movie["title"];
         var year = movie["year"];
         var genre = movie["genre"];
@@ -159,7 +149,6 @@ function insertFilm(movie, res, cpt){
                     if (err) {
                         throw err;
                     } else{
-                        //Film has been created
                         console.log('POST creating new film: ' + film);
                     }
                 });
@@ -208,9 +197,7 @@ router.route('/:id')
     });
 router.route('/import')
         .post(function (req, res) {
-            //TODO post
             var uploadFile = req.body.uploadFile;
-            // Read Synchrously
             console.log("\n *START* \n");
             var content = fs.readFileSync(uploadFile);
             var aMovies = JSON.parse(content);

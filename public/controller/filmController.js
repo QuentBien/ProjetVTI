@@ -95,6 +95,7 @@ var cancelImport = function(){
 	  document.getElementById('form-import').style.display="none";
       document.getElementById('form-import').close();
 	  document.getElementById('cancel-import').removeEventListener('click', cancelImport);
+}
 
 /* Formulaire Edition */
 
