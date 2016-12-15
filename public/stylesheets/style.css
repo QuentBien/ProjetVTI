@@ -8,10 +8,16 @@ a {
 
 .button-ajout {
   position:fixed !important;
-  right:2%;
-  bottom:2%;
+  right:1em;
+  bottom:4em;
   z-index: 2;
 }
+ .button-import{
+    position:fixed !important;
+    right:1em;
+    bottom:1em;
+    z-index: 2; 
+ }
 ::selection {
   background: rgb(255,64,129) !important; /* WebKit/Blink Browsers */
   color: white;
