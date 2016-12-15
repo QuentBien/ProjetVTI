@@ -1,11 +1,14 @@
 var express = require('express'),
     router = express.Router(),
     mongoose = require('mongoose'),
-    bodyParser = require('body-parser'),
-    methodOverride = require('method-override'),
+    bodyParser = require('body-parser'), //parses information from POST
+    methodOverride = require('method-override'), //used to manipulate POST
+    fs = require("fs"),
     path = require('path');
 
-router.use(bodyParser.urlencoded({ extended: true }))
+//router.use(bodyParser.urlencoded({ extended: true }))
+router.use(bodyParser.urlencoded({ extended: false }))
+router.use(bodyParser.json()) 
 router.use(methodOverride(function (req, res) {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
         var method = req.body._method
@@ -13,11 +16,6 @@ router.use(methodOverride(function (req, res) {
         return method
     }
 }))
-
-/* GET New Film page. */
-router.get('/new', function (req, res) {
-    res.render('films/new', { title: 'Ajouter un film' });
-});
 
 router.param('id', function (req, res, next, id) {
     mongoose.model('film').findById(id, function (err, film) {
@@ -71,13 +69,11 @@ router.route('/')
         var genre = req.body.genre;
         var summary = req.body.resume;
         var country = req.body.nationalite;
-
         var director = {
             last_name: req.body.directorLastname,
             first_name: req.body.directorFirstname,
             birth_date: req.body.directorBirth_date,
         };
-
         var actorsString = req.body.actorsList;
         var acteurs = actorsString.split(";");
         var actors = [];
@@ -86,15 +82,68 @@ router.route('/')
             temp = acteur.split(" ");
             actors.push({ last_name: temp[1], first_name: temp[0] });
         }, this);
+
+        var movie = {   
+            "title": req.body.title,
+            "year": req.body.year,
+            "genre": req.body.genre,
+            "summary": req.body.resume,
+            "country": req.body.nationalite,
+            "director": 	{
+                "last_name": req.body.directorLastname,
+                "first_name": req.body.directorFirstname,
+                "birth_date": req.body.directorBirth_date	
+                },
+            "actors": actors
+        };
+        
+        insertFilm(movie, res, 0);
+
+        res.format({
+            //HTML response will set the location and redirect back to the home page. You could also create a 'success' page if that's your thing
+            html: function () {
+                // If it worked, set the header so the address bar doesn't still say /adduser
+                res.location("films");
+
+                // And forward to success page
+                res.redirect("/films");
+            },
+            //JSON response will show the newly created blob
+            json: function () {
+                res.json(film);
+            }
+        });
+    });
+
+function insertFilm(movie, res, cpt){
+            // Get values from POST request. These can be done through forms or REST calls. These rely on the "name" attributes for forms
+        var title = movie["title"];
+        var year = movie["year"];
+        var genre = movie["genre"];
+        var summary = movie["summary"];
+        var country = movie["country"];
+
+        var director = {
+            last_name: movie["director"]["last_name"],
+            first_name: movie["director"]["first_name"],
+            birth_date: movie["director"]["birth_date"]
+        };
+
+        var acteurs = movie["actors"];
+        var actors = [];
+         acteurs.forEach(function (acteur) {
+            actors.push({ last_name: acteur["last_name"], first_name: acteur["first_name"] });
+        }, this);
+
         mongoose.model('film').find({}, function (err, films) {
             if (err) {
-                console.log(err);
-                res.send("There was a problem adding the information to the database.");
+                throw err;
             } else {
-                films.sort(compare);
-                var movie_id = films[films.length - 1]._id;
+                films.sort(compareInteger);
+                var movie_id = films[films.length-1]._id;
                 console.log(movie_id);
-                var id = parseInt(movie_id.split(":")[1]) + 1;
+                var id = parseInt(movie_id.split(":")[1])+1;
+                id = id + cpt;
                 console.log(id);
                 var _id = "movie:" + id;
                 mongoose.model('film').create({
@@ -108,24 +157,15 @@ router.route('/')
                     actors: actors
                 }, function (err, film) {
                     if (err) {
-                        console.log(err);
-                        res.send("There was a problem adding the information to the database.");
-                    } else {
+                        throw err;
+                    } else{
+                        //Film has been created
                         console.log('POST creating new film: ' + film);
-                        res.format({
-                            html: function () {
-                                res.location("films");
-                                res.redirect("/films");
-                            },
-                            json: function () {
-                                res.json(film);
-                            }
-                        });
                     }
                 });
             }
         });
-    });
+}
 router.route('/search')
 	.post(function (req, res) {
         var search = new Object();
@@ -166,13 +206,39 @@ router.route('/:id')
             }
         });
     });
+router.route('/import')
+        .post(function (req, res) {
+            //TODO post
+            var uploadFile = req.body.uploadFile;
+            // Read Synchrously
+            console.log("\n *START* \n");
+            var content = fs.readFileSync(uploadFile);
+            var aMovies = JSON.parse(content);
+            var i = 0;
+            for(var i=0;i<aMovies.length;++i){
+                console.log("\n" + i);
+                console.log("Output Content : \n"+ aMovies[i]["title"].toString()); 
+                insertFilm(aMovies[i], res, i);
+            }
+            console.log("\n *EXIT* \n");
 
-function compare(a, b) {
-    if (a._id < b._id)
-        return -1;
-    if (a._id > b._id)
-        return 1;
-    return 0;
+            res.format({
+                html: function () {
+                    res.location("films");
+                    res.redirect("/films");
+                },
+                json: function () {
+                    res.json("OK");
+                }
+            });
+        });
+
+function compareInteger(a,b) {              
+  if (parseInt(a._id.split(":")[1]) < parseInt(b._id.split(":")[1]))
+    return -1;
+  if (parseInt(a._id.split(":")[1]) > parseInt(b._id.split(":")[1]))
+    return 1;
+  return 0;
 }
 
 router.route('/update')

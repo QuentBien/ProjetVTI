@@ -65,11 +65,36 @@ var confirmAjout = function () {
 	snackbarContainer.MaterialSnackbar.showSnackbar(data);
 	document.getElementById('confirm-ajout').removeEventListener('click', confirmAjout);
 }
-var cancelAjout = function () {
-	document.getElementById('form-ajout').style.display = "none";
-	document.getElementById('form-ajout').close();
-	document.getElementById('cancel-ajout').removeEventListener('click', cancelAjout);
+
+var cancelAjout = function(){
+	  document.getElementById('form-ajout').style.display="none";
+      document.getElementById('form-ajout').close();
+	  document.getElementById('cancel-ajout').removeEventListener('click', cancelAjout);
 }
+
+/* FORMULAIRE IMPORT */
+
+var showImportForm = function(){
+	document.getElementById('form-import').style.display="block";
+	document.getElementById('cancel-import').addEventListener('click', cancelImport);
+	document.getElementById('confirm-import').addEventListener('click', confirmImport);
+	document.getElementById('form-import').showModal();
+};
+
+var confirmImport = function(){
+	  document.getElementById("formImportFilm").submit();
+	  document.getElementById('form-import').style.display="none";
+	  document.getElementById('form-import').close();
+	  var snackbarContainer = document.querySelector('#demo-toast-example');
+	  var showToastButton = document.querySelector('#demo-show-toast');
+      snackbarContainer.MaterialSnackbar.showSnackbar("test");
+	  document.getElementById('confirm-import').removeEventListener('click', confirmImport);
+}
+
+var cancelImport = function(){
+	  document.getElementById('form-import').style.display="none";
+      document.getElementById('form-import').close();
+	  document.getElementById('cancel-import').removeEventListener('click', cancelImport);
 
 /* Formulaire Edition */
 

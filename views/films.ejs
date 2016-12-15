@@ -18,6 +18,11 @@
             onclick="showAjoutForm()">
             <i class="material-icons">add</i>
         </button>
+		<div class="mdl-tooltip mdl-tooltip--left" data-mdl-for="ajoutFilmButton">Ajouter un film</div>
+        <button id="importFilmButton" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored  button-import" onclick="showImportForm()">
+            <i class="material-icons">note_add</i>
+        </button>
+        <div class="mdl-tooltip mdl-tooltip--left mdl-tooltip--large" data-mdl-for="importFilmButton">Importer des films</div>
 		<div class="mdl-tooltip mdl-tooltip--large mdl-tooltip--left" data-mdl-for="ajoutFilmButton">Ajouter un film</div>
 <h1>Films :</h1>
 <form action="/films/search" method="post">
@@ -53,82 +58,138 @@
       <button id="confirm" type="button" class="mdl-button">Confirmer</button>
       <button id="cancel" type="button" class="mdl-button close">Annuler</button>
     </div>
-</dialog>
+  </dialog>
 
-        <!-- FORMULAIRE AJOUT -->
+          <!-- FORMULAIRE AJOUT -->
 
-        <dialog class="mdl-dialog" id="form-ajout" style="width:50%;display:none;">
-            <h4 id="operation_title" class="mdl-dialog__title">Ajouter un film</h4>
-            <div class="mdl-dialog__content">
-                <p id="diag"></p>
-                <form id="formAddFilm" name="addfilm" action="/films" method="post">
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" id="inputTitle" type="text" name="title">
-                        <label class="mdl-textfield__label" for="inputTitle">Titre</label>
-                    </div>
+          <dialog class="mdl-dialog" id="form-ajout" style="width:50%;display:none;">
+              <h4 class="mdl-dialog__title">Ajouter un film</h4>
+              <div class="mdl-dialog__content">
+                  <p id="diag"></p>
+                  <form id="formAddFilm" name="addfilm" action="/films" method="post">
+                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                          <input class="mdl-textfield__input" id="inputTitle" type="text" name="title" required="required">
+                          <label class="mdl-textfield__label" for="inputTitle">Titre</label>
+                      </div>
 
 
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" id="inputAnnee" type="text" pattern="\d{4}" name="year">
-                        <label class="mdl-textfield__label" for="inputAnnee">Année</label>
-                        <span class="mdl-textfield__error">Oush, saisie une année sinon j'ai le seum !</span>
-                    </div>
+                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                          <input class="mdl-textfield__input" id="inputAnnee" type="text" pattern="\d{4}" name="year" required="required">
+                          <label class="mdl-textfield__label" for="inputAnnee">Année</label>
+                          <span class="mdl-textfield__error">Oush, saisie une année sinon j'ai le seum !</span>
+                      </div>
 
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" id="inputGenre" type="text" name="genre">
-                        <label class="mdl-textfield__label" for="inputGenre">Genre</label>
-                    </div>
+                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                          <input class="mdl-textfield__input" id="inputGenre" type="text" name="genre" required="required">
+                          <label class="mdl-textfield__label" for="inputGenre">Genre</label>
+                      </div>
+					  
+					  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                          <input class="mdl-textfield__input" id="inputNationalite" type="text" name="nationalite" required>
+                          <label class="mdl-textfield__label" for="inputNationalite">Nationalite</label>
+                      </div>
 
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" id="inputNationalite" type="text" name="nationalite" required>
-                        <label class="mdl-textfield__label" for="inputNationalite">Nationalite</label>
-                    </div>
+                      <br/>
 
-                    <br/>
+                      <div class="mdl-textfield mdl-js-textfield">
+                          <textarea class="mdl-textfield__input" id="inputSummary" name="resume" cols="200" rows="5"></textarea>
+                          <label class="mdl-textfield__label" for="inputSummary">Résumé</label>
+                      </div>
 
-                    <div class="mdl-textfield mdl-js-textfield">
-                        <textarea class="mdl-textfield__input" id="inputSummary" name="resume" cols="500" rows="5"></textarea>
-                        <label class="mdl-textfield__label" for="inputSummary">Résumé</label>
-                    </div>
+                      <br/>
 
-                    <br/>
+                      <h4> Directeur </h4>
 
-                    <h4> Directeur </h4>
+                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                          <input class="mdl-textfield__input" id="inputDNom" type="text" name="directorLastname" required>
+                          <label class="mdl-textfield__label" for="inputDNom">Nom</label>
+                      </div>
 
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" id="inputDNom" type="text" name="directorLastname" >
-                        <label class="mdl-textfield__label" for="inputDNom">Nom</label>
-                    </div>
+                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                          <input class="mdl-textfield__input" id="inputDPrenom" type="text" name="directorFirstname" required>
+                          <label class="mdl-textfield__label" for="inputDPrenom">Prenom</label>
+                      </div>
 
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" id="inputDPrenom" type="text" name="directorFirstname" >
-                        <label class="mdl-textfield__label" for="inputDPrenom">Prenom</label>
-                    </div>
+                      <br/>
 
-                    <br/>
+                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                          <input class="mdl-textfield__input" id="inputDDdn" type="text" pattern="(0[1-9]|1[0-9]|2[0-9]|3[01])/(0[1-9]|1[012])/[0-9]{4}"
+                              name="directorBirth_date" required>
+                          <label class="mdl-textfield__label" for="inputDDdn">Date de naissance</label>
+                      </div>
 
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" id="inputDDdn" type="text" pattern="(0[1-9]|1[0-9]|2[0-9]|3[01])/(0[1-9]|1[012])/[0-9]{4}"
-                            name="directorBirth_date" >
-                        <label class="mdl-textfield__label" for="inputDDdn">Date de naissance</label>
-                    </div>
+                      <h4> Acteurs </h4>
 
-                    <h4> Acteurs </h4>
+                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                          <input class="mdl-textfield__input" id="inputActorsList" type="text" name="actorsList">
+                          <label class="mdl-textfield__label" for="inputActorsList">Acteurs (noms séparés par un ;)</label>
+                      </div>
+                      <br/>
+                  </form>
+              </div>
+              <div class="mdl-dialog__actions">
+                  <button id="confirm-ajout" type="button" class="mdl-button">Confirmer</button>
+                  <button id="cancel-ajout" type="button" class="mdl-button close">Annuler</button>
+              </div>
+          </dialog>
 
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" id="inputActorsList" type="text" name="actorsList">
-                        <label class="mdl-textfield__label" for="inputActorsList">Acteurs (noms séparés par un ;)</label>
-                    </div>
-                    <br/>
-                </form>
-            </div>
-            <div class="mdl-dialog__actions">
-                <button id="confirm-ajout" type="button" class="mdl-button">Confirmer</button>
-                <button id="cancel-ajout" type="button" class="mdl-button close">Annuler</button>
-            </div>
-        </dialog>
+          <!-- FIN FORMULAIRE AJOUT -->
 
-        <!-- FIN FORMULAIRE AJOUT -->
+          <!-- FORMULAIRE IMPORT -->
+
+          <style>
+            .mdl-button--file   input {
+                cursor: pointer;
+                height: 100%;
+                right: 0;
+                opacity: 0;
+                position: absolute;
+                top: 0;
+                width: 300px;
+                z-index: 4;
+            }
+
+
+            .mdl-textfield--file  .mdl-textfield__input {
+                box-sizing: border-box;
+                width: calc(100% - 32px);
+            }
+            .mdl-textfield--file  .mdl-button--file {
+                right: 0;
+            }
+        </style>
+
+          <dialog class="mdl-dialog" id="form-import" style="width:50%;display:none;">
+              <h4 class="mdl-dialog__title">Importer des films</h4>
+              <div class="mdl-dialog__content">
+                  <p id="diag"></p>
+                  <form id="formImportFilm" name="importfilms" action="/films/import" method="post">
+                    
+                    <h4> Films </h4>
+
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--file">
+                        <input class="mdl-textfield__input" type="text" name='uploadFile' id="uploadFile" readonly placeholder="Fichier au format JSON" />
+                        <div class="mdl-button mdl-button--primary mdl-button--icon mdl-button--file">
+                            <i class="material-icons">attach_file</i><input type="file" id="uploadBtn">
+                        </div>
+                    </div>  
+
+                      <br/>
+                  </form>
+              </div>
+              <div class="mdl-dialog__actions">
+                  <button id="confirm-import" type="button" class="mdl-button">Confirmer</button>
+                  <button id="cancel-import" type="button" class="mdl-button close">Annuler</button>
+              </div>
+          </dialog>
+
+          <script>
+            document.getElementById("uploadBtn").onchange = function () {
+                document.getElementById("uploadFile").value = this.files[0].name;
+            };
+          </script>
+
+          <!-- FIN FORMULAIRE IMPORT -->
 
         <!-- FORMULAIRE EDITION -->
 
@@ -206,7 +267,6 @@
         </dialog>
 
         <!-- FIN FORMULAIRE EDITION -->
-
 
         <div id="flexbox" class="flexbox" style="display:flex;flex-wrap:wrap;justify-content: space-around;justify-content: center;">
             <% films.forEach(function(film) { %>
