@@ -6,8 +6,7 @@ var express = require('express'),
     fs = require("fs"),
     path = require('path');
 
-router.use(bodyParser.urlencoded({ extended: true }))
-//router.use(bodyParser.json()) 
+router.use(bodyParser.urlencoded({ extended: true })) 
 router.use(methodOverride(function (req, res) {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
         var method = req.body._method
