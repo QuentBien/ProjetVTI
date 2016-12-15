@@ -92,21 +92,13 @@ router.route('/')
                 },
             "actors": actors
         };
-        
-        insertFilm(movie, res, 0);
+   
+ 
+        insertFilm(movie, res, 0, true);
 
-        res.format({
-            html: function () {
-                res.location("films");
-                res.redirect("/films");
-            },
-            json: function () {
-                res.json(film);
-            }
-        });
     });
 
-function insertFilm(movie, res, cpt){
+function insertFilm(movie, res, cpt, isLast){
         var title = movie["title"];
         var year = movie["year"];
         var genre = movie["genre"];
@@ -150,6 +142,17 @@ function insertFilm(movie, res, cpt){
                         throw err;
                     } else{
                         console.log('POST creating new film: ' + film);
+                        if(isLast){
+                            res.format({
+                                html: function () {
+                                    res.location("films");
+                                    res.redirect("/films");
+                                },
+                                json: function () {
+                                    res.json(film);
+                                }
+                            });    
+                        }
                     }
                 });
             }
@@ -201,23 +204,13 @@ router.route('/import')
             console.log("\n *START* \n");
             var content = fs.readFileSync(uploadFile);
             var aMovies = JSON.parse(content);
-            var i = 0;
-            for(var i=0;i<aMovies.length;++i){
+            for(var i=0;i<aMovies.length-1;++i){
                 console.log("\n" + i);
                 console.log("Output Content : \n"+ aMovies[i]["title"].toString()); 
-                insertFilm(aMovies[i], res, i);
+                insertFilm(aMovies[i], res, i,false);
             }
+            insertFilm(aMovies[aMovies.length-1], res, aMovies.length-1, true);
             console.log("\n *EXIT* \n");
-
-            res.format({
-                html: function () {
-                    res.location("films");
-                    res.redirect("/films");
-                },
-                json: function () {
-                    res.json("OK");
-                }
-            });
         });
 
 function compareInteger(a,b) {              
