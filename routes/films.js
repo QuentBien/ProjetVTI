@@ -16,28 +16,6 @@ router.use(methodOverride(function (req, res) {
     }
 }))
 
-router.param('id', function (req, res, next, id) {
-    mongoose.model('film').findById(id, function (err, film) {
-        if (err) {
-            console.log(id + ' was not found');
-            res.status(404)
-            var err = new Error('Not Found');
-            err.status = 404;
-            res.format({
-                html: function () {
-                    next(err);
-                },
-                json: function () {
-                    res.json({ message: err.status + ' ' + err });
-                }
-            });
-        } else {
-            req.id = id;
-            next();
-        }
-    });
-});
-
 router.route('/')
     .get(function (req, res, next) {
         mongoose.model('film').find({}, function (err, films) {

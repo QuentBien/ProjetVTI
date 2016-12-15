@@ -39,3 +39,8 @@ h4 {
 .mdl-dialog {
   z-index: 3;
 }
+
+.elTitulo {
+  text-decoration: none;
+  color: #4a4b4c;
+}
